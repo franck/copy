@@ -118,7 +118,11 @@ module Copy
       format_text(params[:name], Copy::Storage.get(params[:name]), :wrap_tag => params[:wrap_tag])
     end
 
-    get '*' do
+    get '/' do
+      redirect to(settings.locales.first)
+    end
+    
+    get "*" do
       @_route = Copy::Router.new(params[:splat].first, settings.views)
       if @_route.success?
         set_cache_control_header
